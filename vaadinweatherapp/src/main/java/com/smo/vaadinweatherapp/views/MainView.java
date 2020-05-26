@@ -49,20 +49,16 @@ public class MainView extends VerticalLayout {
     private Label windSpeedLabel;
     private Label feelsLike;
     private Image iconImg;
-    private HorizontalLayout footer;
-
 
     public MainView() {
+        addClassNames("centered-content", "body");
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        addClassNames("centered-content", "body");
-        setFooter();
         iconImg = new Image();
         setLogo();
         setForm();
         dashboardTitle();
         dashboardDetails();
-
 
         cityTextField.addKeyPressListener(keyPressEvent -> {
             if (keyPressEvent.getKey().getKeys().toString().equals(Key.ENTER.getKeys().toString())) {
@@ -130,24 +126,17 @@ public class MainView extends VerticalLayout {
     private void dashboardTitle() {
         dashboard = new HorizontalLayout();
         dashboard.setDefaultVerticalComponentAlignment(Alignment.CENTER);
-
         // city location
-
         location = new Label("Currently in Warsow");
         location.setWidth("200px");
-
-
         // current temp
-
         currentTemp = new Label("10C");
-
         dashboard.add(location, currentTemp, iconImg);
     }
 
     private void dashboardDetails() {
         mainDescriptionLayout = new HorizontalLayout();
         mainDescriptionLayout.setAlignItems(Alignment.CENTER);
-
         //description Layout
         VerticalLayout descriptionLayout = new VerticalLayout();
         descriptionLayout.setAlignItems(Alignment.CENTER);
@@ -158,38 +147,29 @@ public class MainView extends VerticalLayout {
         weatherDescription = new Label("Description: ");
         weatherDescription.setWidth("250px");
         descriptionLayout.add(weatherDescription);
-
         //Min weather   dummyData
         weatherMin = new Label();
         descriptionLayout.add(weatherMin);
         //Max weather dummyData
         weatherMax = new Label();
         descriptionLayout.add(weatherMax);
-
         // Pressure, humidity, wind, Felike
-
         VerticalLayout pressureLayout = new VerticalLayout();
         pressureLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-
         pressureLabel = new Label();
         pressureLabel.setWidth("120px");
         pressureLayout.add(pressureLabel);
-
         humidityLabel = new Label();
         humidityLabel.setWidth("90px");
         pressureLayout.add(humidityLabel);
-
         windSpeedLabel = new Label();
         windSpeedLabel.setWidth("90px");
         pressureLayout.add(windSpeedLabel);
-
         feelsLike = new Label();
         feelsLike.setWidth("120px");
         pressureLayout.add(feelsLike);
 
-
         mainDescriptionLayout.add(descriptionLayout, pressureLayout);
-
     }
 
 
@@ -234,20 +214,7 @@ public class MainView extends VerticalLayout {
         windSpeedLabel.setText("Wind: " + weatherService.returnWind().getInt("speed") + " m/s");
         feelsLike.setText("Feels Like: " + weatherService.returnMain().getInt("feels_like"));
 
-        add(dashboard, mainDescriptionLayout, footer);
-    }
-
-    private void setFooter() {
-        footer = new HorizontalLayout();
-        footer.setAlignItems(Alignment.START);
-        footer.setSpacing(true);
-        footer.setMargin(true);
-        footer.setWidth("100%");
-        footer.setHeight("40px");
-        Label description = new Label();
-        description.setText("Weather App by Sebastian Smoliński.");
-        description.setWidth("100%");
-        footer.add(description);
+        add(dashboard, mainDescriptionLayout);
     }
 
 
